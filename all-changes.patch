@@ -1,0 +1,576 @@
+diff --git a/dyakuyu.html b/dyakuyu.html
+new file mode 100644
+index 0000000..d282a80
+--- /dev/null
++++ b/dyakuyu.html
+@@ -0,0 +1,152 @@
++<!DOCTYPE html>
++<html lang="en" data-theme="light">
++  <head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <title>Request received — Taras IT</title>
++    <meta name="robots" content="noindex, nofollow" />
++    <meta
++      name="description"
++      content="Thank you — your request has been received. We'll get back to you within 24 hours."
++    />
++    <meta name="theme-color" content="#17120d" />
++
++    <!-- Fonts: Poppins (headings) + Manrope (body) -->
++    <link rel="preconnect" href="https://fonts.googleapis.com" />
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
++    <link
++      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
++      rel="stylesheet"
++    />
++
++    <link
++      rel="icon"
++      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c1573d'/%3E%3Cpath d='M9 11h14M16 11v11' stroke='%23fff8ef' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E"
++    />
++    <link rel="stylesheet" href="styles.css" />
++  </head>
++  <body>
++    <!-- ============ NAV ============ -->
++    <header class="nav" id="nav">
++      <div class="wrap nav-inner">
++        <a href="index.html" class="brand" aria-label="Taras IT home">
++          <img src="img/logo.png" alt="Taras Automation" class="brand-logo" />
++        </a>
++
++        <nav class="nav-links" aria-label="Primary">
++          <a href="index.html#how">How it works</a>
++          <a href="index.html#pricing">Pricing</a>
++          <a href="index.html#faq">FAQ</a>
++          <a href="for-business.html">For Business</a>
++          <a href="index.html#contact">Contact</a>
++        </nav>
++
++        <div class="nav-right">
++          <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
++            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
++              <circle cx="12" cy="12" r="4" />
++              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-linecap="round" />
++            </svg>
++          </button>
++          <a href="index.html#contact" class="btn btn-primary nav-cta">Book a call</a>
++          <button class="menu-btn" data-menu-toggle aria-label="Open menu" aria-expanded="false">
++            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
++              <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
++            </svg>
++          </button>
++        </div>
++      </div>
++
++      <!-- Mobile menu -->
++      <div class="mobile-menu" id="mobile-menu">
++        <a href="index.html#how">How it works</a>
++        <a href="index.html#pricing">Pricing</a>
++        <a href="index.html#faq">FAQ</a>
++        <a href="for-business.html">For Business</a>
++        <a href="index.html#contact">Contact</a>
++        <a href="index.html#contact" class="btn btn-primary btn-block">Book a call</a>
++      </div>
++    </header>
++
++    <main id="top">
++      <!-- ============ THANK YOU ============ -->
++      <section class="hero">
++        <div class="wrap" style="max-width: var(--content-narrow); text-align: center;">
++          <div
++            style="
++              width: 3.5rem; height: 3.5rem; margin: 0 auto var(--space-6);
++              border-radius: var(--radius-full);
++              background: color-mix(in oklab, var(--color-success) 18%, transparent);
++              color: var(--color-success);
++              display: grid; place-items: center;
++            "
++          >
++            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
++              <path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
++            </svg>
++          </div>
++
++          <span class="chip reveal" style="margin: 0 auto;"><span class="chip-dot"></span> Request received</span>
++          <h1 class="reveal" style="margin-top: var(--space-5);">Thank you — your request has been received.</h1>
++          <p class="hero-sub reveal" style="margin: var(--space-5) auto 0; max-width: 46ch;">
++            I'll get back to you within 24 hours.
++          </p>
++        </div>
++      </section>
++
++      <!-- ============ WHAT'S NEXT ============ -->
++      <section class="section-pad-tight">
++        <div class="wrap" style="max-width: var(--content-narrow);">
++          <div class="step reveal">
++            <span class="eyebrow">While you wait</span>
++            <h2 style="font-size: var(--text-xl); margin-top: var(--space-4);">A few things that help speed up the call</h2>
++            <ul class="fact-list" style="margin-top: var(--space-6);">
++              <li>→ Have one sample receipt or invoice ready to share</li>
++              <li>→ Think through how your team currently sends documents — email, photo, or chat</li>
++              <li>→ Jot down roughly how many people or crews would use it</li>
++            </ul>
++          </div>
++
++          <div class="hero-cta reveal" style="margin-top: var(--space-10); justify-content: center;">
++            <a href="index.html" class="btn btn-primary">Back to home</a>
++            <a href="mailto:book@taras-it.com" class="btn btn-ghost">📧 book@taras-it.com</a>
++          </div>
++        </div>
++      </section>
++    </main>
++
++    <!-- ============ FOOTER ============ -->
++    <footer class="footer">
++      <div class="wrap">
++        <div class="footer-top">
++          <div>
++            <a href="index.html" class="brand">
++              <img src="img/logo.png" alt="Taras Automation" class="brand-logo" />
++            </a>
++          </div>
++          <div class="footer-cols">
++            <div class="footer-col">
++              <h5>Site</h5>
++              <a href="index.html#how">How it works</a>
++              <a href="index.html#pricing">Pricing</a>
++              <a href="index.html#faq">FAQ</a>
++              <a href="for-business.html">For Business</a>
++            </div>
++            <div class="footer-col">
++              <h5>Contact</h5>
++              <a href="mailto:book@taras-it.com">book@taras-it.com</a>
++              <a href="tel:+13477221230">+1 347-722-1230</a>
++              <a href="https://t.me/it_tom_lviv" target="_blank" rel="noopener">Telegram</a>
++            </div>
++          </div>
++        </div>
++        <div class="footer-bottom">
++          <span>© 2026 Taras IT — Automation for small crews</span>
++          <span>book@taras-it.com · +1 347-722-1230</span>
++        </div>
++      </div>
++    </footer>
++
++    <script src="app.js"></script>
++  </body>
++</html>
+diff --git a/for-business.html b/for-business.html
+new file mode 100644
+index 0000000..0992aa1
+--- /dev/null
++++ b/for-business.html
+@@ -0,0 +1,296 @@
++<!DOCTYPE html>
++<html lang="en" data-theme="light">
++  <head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <title>For Business — Taras IT | Automation Business Model</title>
++    <meta
++      name="description"
++      content="How Taras IT works as a business: partners, key activities, value proposition, customer segments, cost structure and revenue streams — a full Business Model Canvas."
++    />
++    <meta property="og:type" content="website" />
++    <meta property="og:title" content="For Business — Taras IT | Automation Business Model" />
++    <meta
++      property="og:description"
++      content="How Taras IT works as a business: partners, key activities, value proposition, customer segments, cost structure and revenue streams — a full Business Model Canvas."
++    />
++    <meta name="theme-color" content="#17120d" />
++
++    <!-- Fonts: Poppins (headings) + Manrope (body) -->
++    <link rel="preconnect" href="https://fonts.googleapis.com" />
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
++    <link
++      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
++      rel="stylesheet"
++    />
++
++    <link
++      rel="icon"
++      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c1573d'/%3E%3Cpath d='M9 11h14M16 11v11' stroke='%23fff8ef' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E"
++    />
++    <link rel="stylesheet" href="styles.css" />
++  </head>
++  <body>
++    <!-- ============ NAV ============ -->
++    <header class="nav" id="nav">
++      <div class="wrap nav-inner">
++        <a href="index.html" class="brand" aria-label="Taras IT home">
++          <img src="img/logo.png" alt="Taras Automation" class="brand-logo" />
++        </a>
++
++        <nav class="nav-links" aria-label="Primary">
++          <a href="index.html#how">How it works</a>
++          <a href="index.html#pricing">Pricing</a>
++          <a href="index.html#faq">FAQ</a>
++          <a href="for-business.html" aria-current="page">For Business</a>
++          <a href="index.html#contact">Contact</a>
++        </nav>
++
++        <div class="nav-right">
++          <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
++            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
++              <circle cx="12" cy="12" r="4" />
++              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-linecap="round" />
++            </svg>
++          </button>
++          <a href="index.html#contact" class="btn btn-primary nav-cta">Book a call</a>
++          <button class="menu-btn" data-menu-toggle aria-label="Open menu" aria-expanded="false">
++            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
++              <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
++            </svg>
++          </button>
++        </div>
++      </div>
++
++      <!-- Mobile menu -->
++      <div class="mobile-menu" id="mobile-menu">
++        <a href="index.html#how">How it works</a>
++        <a href="index.html#pricing">Pricing</a>
++        <a href="index.html#faq">FAQ</a>
++        <a href="for-business.html">For Business</a>
++        <a href="index.html#contact">Contact</a>
++        <a href="index.html#contact" class="btn btn-primary btn-block">Book a call</a>
++      </div>
++    </header>
++
++    <main id="top">
++      <!-- ============ HERO ============ -->
++      <section class="hero">
++        <div class="wrap">
++          <span class="chip reveal"><span class="chip-dot"></span> For partners &amp; investors</span>
++          <h1 class="reveal" style="margin-top: var(--space-5); max-width: 26ch;">
++            How Taras IT works as a business.
++          </h1>
++          <p class="hero-sub reveal" style="margin-top: var(--space-5); max-width: 62ch;">
++            A short, honest look at who we serve, how we deliver value, and how the numbers work —
++            the Business Model Canvas behind the automation studio.
++          </p>
++        </div>
++      </section>
++
++      <!-- ============ BUSINESS MODEL CANVAS ============ -->
++      <section class="section-pad" id="bmc">
++        <div class="wrap">
++          <span class="eyebrow reveal">Business model</span>
++          <h2 class="section-title reveal" style="max-width: 100%;">Business Model Canvas</h2>
++          <p class="section-lead reveal" style="max-width: 100%;">
++            Tap or click any block to see the details. Nine building blocks, one clear picture of how the
++            business creates, delivers, and captures value.
++          </p>
++
++          <div class="bmc-grid reveal">
++            <div class="bmc-card bmc-span-1-2" style="--bmc-color:#534AB7" data-bmc="partners">
++              <p class="bmc-title">🤝 Key Partners</p>
++              <ul>
++                <li>OpenAI, Make.com, n8n</li>
++                <li>Notion, Google Workspace</li>
++                <li>Telegram API</li>
++                <li>Construction companies</li>
++                <li>Pharmacies, retail stores</li>
++                <li>Upwork, Fiverr, TaskRabbit</li>
++                <li>Ukrainian community in NYC</li>
++              </ul>
++            </div>
++
++            <div class="bmc-card" style="--bmc-color:#0F6E56" data-bmc="activities">
++              <p class="bmc-title">⚙️ Key Activities</p>
++              <ul>
++                <li>Building automations with Make.com / n8n</li>
++                <li>Implementing AI (GPT, Whisper)</li>
++                <li>Small-business consulting</li>
++                <li>Telegram bot development</li>
++                <li>Client technical support</li>
++                <li>Staff training</li>
++              </ul>
++            </div>
++
++            <div class="bmc-card bmc-span-1-2" style="--bmc-color:#D85A30" data-bmc="value">
++              <p class="bmc-title">💎 Value Propositions</p>
++              <ul>
++                <li>Automation without replacing people</li>
++                <li>Saves time and money</li>
++                <li>Custom-built solutions</li>
++                <li>Live in 1–2 weeks</li>
++                <li>Affordable for small business</li>
++                <li>Support after launch</li>
++                <li>Service in three languages</li>
++              </ul>
++            </div>
++
++            <div class="bmc-card" style="--bmc-color:#185FA5" data-bmc="relations">
++              <p class="bmc-title">💬 Customer Relationships</p>
++              <ul>
++                <li>Personal approach</li>
++                <li>Free consultation</li>
++                <li>Staff training</li>
++                <li>Support via Telegram</li>
++                <li>Long-term relationships</li>
++                <li>Reports &amp; analytics</li>
++              </ul>
++            </div>
++
++            <div class="bmc-card bmc-span-1-2" style="--bmc-color:#3B6D11" data-bmc="segments">
++              <p class="bmc-title">👥 Customer Segments</p>
++              <ul>
++                <li>US construction companies</li>
++                <li>Pharmacies &amp; medical offices</li>
++                <li>Grocery stores</li>
++                <li>Electrical supply stores</li>
++                <li>Auto salvage yards &amp; repair shops</li>
++                <li>Small business in Poland</li>
++                <li>Business &amp; NGOs in Ukraine</li>
++              </ul>
++            </div>
++
++            <div class="bmc-card" style="--bmc-color:#0F6E56" data-bmc="resources">
++              <p class="bmc-title">🔧 Key Resources</p>
++              <ul>
++                <li>Make.com, GPT, Whisper skills</li>
++                <li>Background in electrical work &amp; construction</li>
++                <li>Portfolio of automations</li>
++                <li>NYC network of contacts</li>
++                <li>English, Ukrainian, Polish</li>
++                <li>Upwork / TaskRabbit profiles</li>
++              </ul>
++            </div>
++
++            <div class="bmc-card" style="--bmc-color:#185FA5" data-bmc="channels">
++              <p class="bmc-title">📢 Channels</p>
++              <ul>
++                <li>Company website</li>
++                <li>Upwork / Fiverr</li>
++                <li>TaskRabbit</li>
++                <li>LinkedIn</li>
++                <li>Ukrainian community NYC</li>
++                <li>Polish community NYC</li>
++                <li>Cold email outreach</li>
++              </ul>
++            </div>
++
++          </div>
++
++          <div class="bmc-grid-bottom reveal">
++            <div class="bmc-card" style="--bmc-color:#A32D2D" data-bmc="costs">
++              <p class="bmc-title">💸 Cost Structure</p>
++              <ul>
++                <li>OpenAI API ~$20–50/mo</li>
++                <li>Make.com ~$9–29/mo</li>
++                <li>Hosting ~$10–20/mo</li>
++                <li>LLC registration ~$200</li>
++                <li>Website ~$200–500</li>
++                <li>Marketing ~$100–200</li>
++                <li>Total startup cost: ~$800–1500</li>
++              </ul>
++            </div>
++
++            <div class="bmc-card" style="--bmc-color:#3B6D11" data-bmc="revenue">
++              <p class="bmc-title">💰 Revenue Streams</p>
++              <ul>
++                <li>Automation build: $500–2000</li>
++                <li>Telegram bot: $300–800</li>
++                <li>Consulting: $50–100/hr</li>
++                <li>Support: $100–300/mo</li>
++                <li>Training: $200–500/course</li>
++                <li>Month 3 target: $1000–3000/mo</li>
++                <li>Year 1 target: $8000–15000/mo</li>
++              </ul>
++            </div>
++          </div>
++
++          <p style="font-size: var(--text-xs); color: var(--color-text-faint); margin-top: var(--space-8); text-align: center;">
++            © 2026 Taras IT — AI Automation
++          </p>
++        </div>
++      </section>
++
++      <!-- ============ CONTACT / CTA ============ -->
++      <section class="section-pad" id="contact">
++        <div class="wrap">
++          <div class="cta-band reveal">
++            <h2>Want to partner or invest?<br /><span class="hl">Let's talk business.</span></h2>
++            <p class="sub">Book a free 20-minute call.</p>
++            <p class="lead">Or reach out directly — we're happy to share more detail on traction, pricing, and roadmap.</p>
++            <div class="cta-actions">
++              <a href="tel:+13477221230" class="btn btn-primary">Book a call · +1 347-722-1230</a>
++              <a href="mailto:book@taras-it.com?subject=Partnership%20%2F%20investment%20inquiry" class="btn btn-accent">📧 book@taras-it.com</a>
++            </div>
++          </div>
++        </div>
++      </section>
++    </main>
++
++    <!-- ============ FOOTER ============ -->
++    <footer class="footer">
++      <div class="wrap">
++        <div class="footer-top">
++          <div>
++            <a href="index.html" class="brand">
++              <img src="img/logo.png" alt="Taras Automation" class="brand-logo" />
++            </a>
++          </div>
++          <div class="footer-cols">
++            <div class="footer-col">
++              <h5>Site</h5>
++              <a href="index.html#how">How it works</a>
++              <a href="index.html#pricing">Pricing</a>
++              <a href="index.html#faq">FAQ</a>
++              <a href="for-business.html">For Business</a>
++            </div>
++            <div class="footer-col">
++              <h5>Contact</h5>
++              <a href="mailto:book@taras-it.com">book@taras-it.com</a>
++              <a href="tel:+13477221230">+1 347-722-1230</a>
++              <a href="https://t.me/it_tom_lviv" target="_blank" rel="noopener">Telegram</a>
++            </div>
++          </div>
++        </div>
++        <div class="footer-bottom">
++          <span>© 2026 Taras IT — Automation for small crews</span>
++          <span>book@taras-it.com · +1 347-722-1230</span>
++        </div>
++      </div>
++    </footer>
++
++    <!-- ============ FLOATING BOOKING BUTTON ============ -->
++    <a href="index.html#contact" class="floating-cta" aria-label="Book a call or consultation">
++      📅 Book a call
++    </a>
++
++    <script src="app.js"></script>
++    <script>
++      // Business Model Canvas — click/tap a block to highlight it (mirrors the
++      // interactive behaviour of the internal BMC component, in plain JS since
++      // this site has no build step).
++      (function () {
++        var cards = document.querySelectorAll('.bmc-card');
++        cards.forEach(function (card) {
++          card.addEventListener('click', function () {
++            var isActive = card.classList.contains('active');
++            cards.forEach(function (c) { c.classList.remove('active'); });
++            if (!isActive) card.classList.add('active');
++          });
++        });
++      })();
++    </script>
++  </body>
++</html>
+diff --git a/index.html b/index.html
+index c1c2d5b..53d9af0 100644
+--- a/index.html
++++ b/index.html
+@@ -46,6 +46,7 @@ In the yard of the 21st century…
+           <a href="#how">How it works</a>
+           <a href="#pricing">Pricing</a>
+           <a href="#faq">FAQ</a>
++          <a href="for-business.html">For Business</a>
+           <a href="#contact">Contact</a>
+         </nav>
+ 
+@@ -70,6 +71,7 @@ In the yard of the 21st century…
+         <a href="#how">How it works</a>
+         <a href="#pricing">Pricing</a>
+         <a href="#faq">FAQ</a>
++        <a href="for-business.html">For Business</a>
+         <a href="#contact">Contact</a>
+         <a href="#contact" class="btn btn-primary btn-block">Book a call</a>
+       </div>
+@@ -529,6 +531,7 @@ In the yard of the 21st century…
+               <a href="#how">How it works</a>
+               <a href="#pricing">Pricing</a>
+               <a href="#faq">FAQ</a>
++              <a href="for-business.html">For Business</a>
+             </div>
+             <div class="footer-col">
+               <h5>Contact</h5>
+@@ -567,6 +570,9 @@ In the yard of the 21st century…
+             'Name: ' + name + '\nPhone/email: ' + contact + '\n\nPlease contact me about setting up invoice automation.'
+           );
+           window.location.href = 'mailto:book@taras-it.com?subject=' + subject + '&body=' + body;
++          window.setTimeout(function () {
++            window.location.href = 'dyakuyu.html';
++          }, 300);
+         });
+       })();
+     </script>
+diff --git a/sitemap.xml b/sitemap.xml
+index 778fd3c..74e7931 100644
+--- a/sitemap.xml
++++ b/sitemap.xml
+@@ -6,4 +6,10 @@
+     <changefreq>monthly</changefreq>
+     <priority>1.0</priority>
+   </url>
++  <url>
++    <loc>https://taras-it.com/for-business.html</loc>
++    <lastmod>2026-08-14</lastmod>
++    <changefreq>monthly</changefreq>
++    <priority>0.8</priority>
++  </url>
+ </urlset>
+diff --git a/styles.css b/styles.css
+index e000f85..aaa4414 100644
+--- a/styles.css
++++ b/styles.css
+@@ -545,6 +545,58 @@ section { position: relative; }
+ .shot-label { font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); color: var(--color-text); max-width: 32ch; }
+ .shot-note { font-size: var(--text-xs); color: var(--color-text-faint); }
+ 
++/* ========================================================= Business Model Canvas (For Business page) */
++.bmc-grid {
++  display: grid;
++  grid-template-columns: repeat(6, 1fr);
++  gap: var(--space-4);
++  margin-top: var(--space-10);
++}
++.bmc-card {
++  grid-column: span 6;
++  background: var(--color-surface);
++  border: 1px solid var(--color-border);
++  border-top: 3px solid var(--bmc-color, var(--color-primary));
++  border-radius: var(--radius-lg);
++  padding: var(--space-6) var(--space-7);
++  cursor: pointer;
++  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
++}
++.bmc-card:hover { transform: translateY(-2px); }
++.bmc-card.active {
++  box-shadow: 0 0 0 2px color-mix(in oklab, var(--bmc-color, var(--color-primary)) 45%, transparent);
++}
++.bmc-title {
++  font-family: var(--font-display);
++  font-weight: 700;
++  font-size: var(--text-sm);
++  color: var(--bmc-color, var(--color-primary));
++  margin-bottom: var(--space-3);
++}
++.bmc-card ul { display: grid; gap: var(--space-1); padding-left: var(--space-5); }
++.bmc-card li {
++  list-style: disc;
++  font-size: var(--text-sm);
++  color: var(--color-text-muted);
++  line-height: 1.55;
++}
++.bmc-grid-bottom {
++  display: grid;
++  grid-template-columns: 1fr;
++  gap: var(--space-4);
++  margin-top: var(--space-4);
++}
++@media (min-width: 640px) {
++  .bmc-span-1-2 { grid-column: span 3; }
++  .bmc-card:not(.bmc-span-1-2) { grid-column: span 3; }
++  .bmc-grid-bottom { grid-template-columns: 1fr 1fr; }
++}
++@media (min-width: 1040px) {
++  .bmc-grid { grid-template-columns: repeat(5, 1fr); grid-auto-flow: dense; }
++  .bmc-span-1-2 { grid-column: span 1; grid-row: span 2; }
++  .bmc-card:not(.bmc-span-1-2) { grid-column: span 1; }
++}
++
+ /* Real screenshots / logo */
+ .brand-logo { height: 32px; width: auto; display: block; }
+ .shot-img {
