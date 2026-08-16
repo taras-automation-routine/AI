@@ -511,6 +511,7 @@ In the yard of the 21st century…
               <a href="#how">How it works</a>
               <a href="#pricing">Pricing</a>
               <a href="#faq">FAQ</a>
+              <a href="privacy.html">Privacy Policy</a>
             </div>
             <div class="footer-col">
               <h5>Contact</h5>
@@ -532,6 +533,20 @@ In the yard of the 21st century…
       📅 Book a call
     </a>
 
+    <!-- ============ COOKIE CONSENT BANNER ============ -->
+    <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie consent">
+      <div class="cookie-banner-inner">
+        <p class="cookie-banner-text">
+          We use cookies to see how visitors use this site — analytics only run if you agree. See our
+          <a href="privacy.html">Privacy Policy</a>.
+        </p>
+        <div class="cookie-banner-actions">
+          <button type="button" class="cookie-btn cookie-btn-necessary" id="cookie-necessary">Only necessary</button>
+          <button type="button" class="cookie-btn cookie-btn-accept" id="cookie-accept">Accept</button>
+        </div>
+      </div>
+    </div>
+
     <script src="app.js"></script>
     <script>
       // Lead form — no backend required: builds a pre-filled email and hands it to the
@@ -549,7 +564,53 @@ In the yard of the 21st century…
             'Name: ' + name + '\nPhone/email: ' + contact + '\n\nPlease contact me about setting up invoice automation.'
           );
           window.location.href = 'mailto:book@taras-it.com?subject=' + subject + '&body=' + body;
+          // Send the visitor to the thank-you page too — mailto: opens the mail app
+          // without navigating the tab, so this still lands them on /thank-you.html.
+          // Anyone who reaches that page came from a submitted form, so it doubles
+          // as a simple lead counter.
+          window.setTimeout(function () {
+            window.location.href = 'thank-you.html';
+          }, 300);
         });
+      })();
+    </script>
+    <script>
+      // Cookie consent — analytics stays off until the visitor chooses "Accept".
+      // Hook point: when adding analytics later, only load/init it inside
+      // applyConsent() when value === 'accepted' (or listen for the
+      // 'cookieconsent' event on document and check e.detail.consent).
+      (function () {
+        var KEY = 'taras_cookie_consent';
+        var banner = document.getElementById('cookie-banner');
+        var floatingCta = document.querySelector('.floating-cta');
+        if (!banner) return;
+
+        function applyConsent(value) {
+          window.tarasCookieConsent = value; // 'accepted' | 'necessary'
+          document.dispatchEvent(new CustomEvent('cookieconsent', { detail: { consent: value } }));
+        }
+
+        function choose(value) {
+          try { localStorage.setItem(KEY, value); } catch (e) {}
+          banner.classList.remove('is-visible');
+          if (floatingCta) floatingCta.classList.remove('is-hidden');
+          applyConsent(value);
+        }
+
+        var stored = null;
+        try { stored = localStorage.getItem(KEY); } catch (e) {}
+
+        if (stored) {
+          applyConsent(stored);
+        } else {
+          banner.classList.add('is-visible');
+          if (floatingCta) floatingCta.classList.add('is-hidden');
+        }
+
+        var acceptBtn = document.getElementById('cookie-accept');
+        var necessaryBtn = document.getElementById('cookie-necessary');
+        if (acceptBtn) acceptBtn.addEventListener('click', function () { choose('accepted'); });
+        if (necessaryBtn) necessaryBtn.addEventListener('click', function () { choose('necessary'); });
       })();
     </script>
   </body>
