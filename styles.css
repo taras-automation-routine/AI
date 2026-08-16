@@ -371,7 +371,7 @@ section { position: relative; }
 
 .chip {
   display: inline-flex; align-items: center; gap: var(--space-2);
-  font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: calc(var(--text-xs) * 2); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
   padding: var(--space-2) var(--space-4); border-radius: var(--radius-full);
   background: var(--color-primary-soft); color: var(--color-primary);
   border: 1px solid color-mix(in oklab, var(--color-primary) 22%, transparent);
@@ -382,7 +382,7 @@ section { position: relative; }
 @media (max-width: 899px) { .hero h1 { font-size: clamp(1.6rem, 6vw, 2.1rem); } }
 .hero h1 .hl { color: var(--color-primary); }
 .hero-h1--sm { font-size: clamp(1.3rem, 1.1vw + 0.9rem, 1.7rem) !important; }
-.hero-h1--xs { font-size: var(--text-sm) !important; margin-top: var(--space-5); }
+.hero-h1--xs { font-size: calc(var(--text-sm) * 2) !important; margin-top: var(--space-5); }
 .hero-lines { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
 .hero-lines li { position: relative; padding-left: 1.1em; font-weight: 600; }
 .hero-lines li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 0.4em; height: 0.4em; border-radius: 50%; background: var(--color-primary); }
