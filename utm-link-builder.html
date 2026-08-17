@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UTM Link Builder — Taras IT</title>
+<style>
+  :root {
+    --bg: #17120d;
+    --surface: #221b14;
+    --border: #3a2f24;
+    --text: #f6efe4;
+    --muted: #b8ab98;
+    --accent: #c1573d;
+    --accent-2: #4a7c59;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1.25rem 4rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Manrope, Arial, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .sub { color: var(--muted); margin: 0 0 2rem; font-size: 0.95rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .card h2 { font-size: 1.05rem; margin: 0 0 1rem; }
+  label { display: block; font-size: 0.85rem; color: var(--muted); margin: 0.9rem 0 0.35rem; }
+  label:first-of-type { margin-top: 0; }
+  input, select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background: #120e0a;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .presets { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+  .preset-btn {
+    background: #120e0a;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .preset-btn:hover { border-color: var(--accent); }
+  .result {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  .result input {
+    flex: 1;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--accent-2);
+  }
+  .copy-btn {
+    background: var(--accent);
+    color: #fff8ef;
+    border: none;
+    border-radius: 8px;
+    padding: 0 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { filter: brightness(1.08); }
+  .copy-btn.copied { background: var(--accent-2); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { text-align: left; padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; }
+  td.link { font-family: monospace; color: var(--accent-2); word-break: break-all; }
+  .row-copy {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .row-copy:hover { border-color: var(--accent); color: var(--text); }
+  .hint { font-size: 0.8rem; color: var(--muted); margin-top: 0.75rem; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>UTM link builder</h1>
+  <p class="sub">Build tagged links for taras-it.com so Google Analytics (and the lead form) show exactly which channel a visitor came from.</p>
+
+  <div class="card">
+    <h2>Build a link</h2>
+    <div class="presets" id="presets"></div>
+
+    <label for="base">Page / anchor</label>
+    <select id="base">
+      <option value="https://taras-it.com/">Homepage</option>
+      <option value="https://taras-it.com/#pricing">Homepage — Pricing section</option>
+      <option value="https://taras-it.com/#contact">Homepage — Contact / booking form</option>
+      <option value="https://taras-it.com/#how">Homepage — How it works</option>
+    </select>
+
+    <label for="source">Source (utm_source) — where the click comes from</label>
+    <input id="source" type="text" placeholder="instagram" />
+
+    <label for="medium">Medium (utm_medium) — the type of channel</label>
+    <input id="medium" type="text" placeholder="social" />
+
+    <label for="campaign">Campaign (utm_campaign) — which specific push</label>
+    <input id="campaign" type="text" placeholder="bio_link" />
+
+    <label for="content">Content (utm_content) — optional, tells apart two links in the same post</label>
+    <input id="content" type="text" placeholder="swipe_up (optional)" />
+
+    <div class="result">
+      <input id="output" type="text" readonly />
+      <button class="copy-btn" id="copy-output">Copy</button>
+    </div>
+    <p class="hint">Paste this link wherever you post — in the Instagram bio, a Telegram post, a YouTube description, or an email. Google Analytics reads the utm_ parameters automatically once a visitor lands with them; the site's booking form also picks them up and adds "Source: ..." to the email you receive, so you know the channel for every single lead.</p>
+  </div>
+
+  <div class="card">
+    <h2>Ready-made links for your main channels</h2>
+    <table id="ready-table">
+      <thead><tr><th>Channel / placement</th><th>Link</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  var BASES = {
+    home: 'https://taras-it.com/',
+    pricing: 'https://taras-it.com/#pricing',
+    contact: 'https://taras-it.com/#contact'
+  };
+
+  var PRESETS = [
+    { label: 'Instagram — bio link', source: 'instagram', medium: 'social', campaign: 'bio_link', content: '', base: BASES.home },
+    { label: 'Instagram — story', source: 'instagram', medium: 'social', campaign: 'story', content: 'swipe_up', base: BASES.home },
+    { label: 'Instagram — feed post', source: 'instagram', medium: 'social', campaign: 'post', content: '', base: BASES.home },
+    { label: 'Telegram — channel post', source: 'telegram', medium: 'social', campaign: 'channel_post', content: '', base: BASES.home },
+    { label: 'Telegram — bio / pinned', source: 'telegram', medium: 'social', campaign: 'bio_link', content: '', base: BASES.home },
+    { label: 'YouTube — video description', source: 'youtube', medium: 'video', campaign: 'video_description', content: '', base: BASES.home },
+    { label: 'YouTube — pinned comment', source: 'youtube', medium: 'video', campaign: 'pinned_comment', content: '', base: BASES.home },
+    { label: 'Email — newsletter', source: 'email', medium: 'email', campaign: 'newsletter', content: '', base: BASES.home },
+    { label: 'Email — signature', source: 'email', medium: 'email', campaign: 'signature', content: '', base: BASES.home },
+    { label: 'Facebook — post', source: 'facebook', medium: 'social', campaign: 'post', content: '', base: BASES.home },
+    { label: 'LinkedIn — post', source: 'linkedin', medium: 'social', campaign: 'post', content: '', base: BASES.home }
+  ];
+
+  function slugify(v) {
+    return v.trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_\-]/g, '');
+  }
+
+  function buildUrl(base, source, medium, campaign, content) {
+    var url = new URL(base);
+    if (source) url.searchParams.set('utm_source', slugify(source));
+    if (medium) url.searchParams.set('utm_medium', slugify(medium));
+    if (campaign) url.searchParams.set('utm_campaign', slugify(campaign));
+    if (content) url.searchParams.set('utm_content', slugify(content));
+    return url.toString();
+  }
+
+  var sourceEl = document.getElementById('source');
+  var mediumEl = document.getElementById('medium');
+  var campaignEl = document.getElementById('campaign');
+  var contentEl = document.getElementById('content');
+  var baseEl = document.getElementById('base');
+  var outputEl = document.getElementById('output');
+  var copyBtn = document.getElementById('copy-output');
+
+  function refresh() {
+    outputEl.value = buildUrl(baseEl.value, sourceEl.value, mediumEl.value, campaignEl.value, contentEl.value);
+  }
+  [sourceEl, mediumEl, campaignEl, contentEl, baseEl].forEach(function (el) {
+    el.addEventListener('input', refresh);
+    el.addEventListener('change', refresh);
+  });
+  refresh();
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(function () {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1400);
+    });
+  }
+
+  copyBtn.addEventListener('click', function () {
+    if (!outputEl.value) return;
+    copyText(outputEl.value, copyBtn);
+  });
+
+  var presetsWrap = document.getElementById('presets');
+  PRESETS.forEach(function (p) {
+    var btn = document.createElement('button');
+    btn.className = 'preset-btn';
+    btn.type = 'button';
+    btn.textContent = p.label;
+    btn.addEventListener('click', function () {
+      sourceEl.value = p.source;
+      mediumEl.value = p.medium;
+      campaignEl.value = p.campaign;
+      contentEl.value = p.content;
+      baseEl.value = p.base;
+      refresh();
+    });
+    presetsWrap.appendChild(btn);
+  });
+
+  var tbody = document.querySelector('#ready-table tbody');
+  PRESETS.forEach(function (p) {
+    var url = buildUrl(p.base, p.source, p.medium, p.campaign, p.content);
+    var tr = document.createElement('tr');
+    var tdLabel = document.createElement('td');
+    tdLabel.textContent = p.label;
+    var tdLink = document.createElement('td');
+    tdLink.className = 'link';
+    tdLink.textContent = url;
+    var tdBtn = document.createElement('td');
+    var rowBtn = document.createElement('button');
+    rowBtn.className = 'row-copy';
+    rowBtn.type = 'button';
+    rowBtn.textContent = 'Copy';
+    rowBtn.addEventListener('click', function () { copyText(url, rowBtn); });
+    tdBtn.appendChild(rowBtn);
+    tr.appendChild(tdLabel);
+    tr.appendChild(tdLink);
+    tr.appendChild(tdBtn);
+    tbody.appendChild(tr);
+  });
+</script>
+</body>
+</html>

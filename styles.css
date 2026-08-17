@@ -541,17 +541,33 @@ section { position: relative; }
   display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center;
   margin-top: var(--space-6); max-width: 34rem; margin-inline: auto;
 }
-.lead-form input {
+.lead-form input,
+.lead-form select,
+.lead-form textarea {
   flex: 1 1 12rem; min-width: 10rem; min-height: 44px;
   padding: var(--space-3) var(--space-4); border-radius: var(--radius-full);
   border: 1px solid color-mix(in oklab, var(--color-bg) 30%, transparent);
   background: color-mix(in oklab, var(--color-bg) 10%, transparent);
   color: var(--color-bg); font-size: var(--text-sm);
+  font-family: inherit;
 }
-.lead-form input::placeholder { color: color-mix(in oklab, var(--color-bg) 55%, transparent); }
-.lead-form input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.lead-form select { flex-basis: 12rem; }
+.lead-form select option { color: #1a1a1a; }
+.lead-form textarea {
+  flex: 1 1 100%; min-height: 3.4rem; border-radius: var(--radius-lg);
+  resize: vertical; line-height: 1.4;
+}
+.lead-form input::placeholder,
+.lead-form textarea::placeholder { color: color-mix(in oklab, var(--color-bg) 55%, transparent); }
+.lead-form input:focus-visible,
+.lead-form select:focus-visible,
+.lead-form textarea:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .lead-form .btn { border-color: color-mix(in oklab, var(--color-bg) 30%, transparent); color: var(--color-bg); }
 .lead-form .btn:hover { border-color: var(--color-bg); }
+.lead-form-error {
+  flex: 1 1 100%; margin: 0; text-align: center; font-size: var(--text-sm);
+  color: #ffd7ce; font-weight: 600;
+}
 
 /* ========================================================= Footer */
 .footer { border-top: 1px solid var(--color-border); padding-block: var(--space-16) var(--space-10); margin-top: var(--space-24); }

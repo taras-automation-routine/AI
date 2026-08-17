@@ -118,5 +118,25 @@
     </footer>
 
     <script src="app.js"></script>
+    <script>
+      // Google Analytics — only loads if the visitor already accepted cookies
+      // (choice made via the banner on the homepage). No banner lives on this
+      // page, so we just read the stored choice; nothing loads without it.
+      (function () {
+        var consent = null;
+        try { consent = localStorage.getItem('taras_cookie_consent'); } catch (e) {}
+        if (consent !== 'accepted') return;
+        var GA_ID = 'G-7XWMNS201S';
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      })();
+    </script>
   </body>
 </html>

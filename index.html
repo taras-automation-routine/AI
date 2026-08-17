@@ -480,7 +480,7 @@ In the yard of the 21st century…
           <div class="cta-band reveal">
             <h2>Stop your routine!<br /><span class="hl">In the yard of the 21st century…</span></h2>
             <p class="sub">Book a free 20-minute call.</p>
-            <p class="lead">Or leave your details below — it opens a ready-to-send email to us, no typing required.</p>
+            <p class="lead">Or leave your details below — takes 15 seconds, we'll reach out.</p>
             <div class="cta-actions">
               <a href="tel:+13477221230" class="btn btn-primary">Book a free setup call · +1 347-722-1230</a>
               <a href="mailto:book@taras-it.com?subject=Invoice%20automation%20-%20setup%20call" class="btn btn-accent">📧 book@taras-it.com</a>
@@ -489,7 +489,16 @@ In the yard of the 21st century…
             <form class="lead-form" id="lead-form" aria-label="Leave your contact details">
               <input type="text" id="lf-name" name="name" placeholder="Your name" required autocomplete="name" />
               <input type="text" id="lf-contact" name="contact" placeholder="Phone or email" required autocomplete="tel" />
+              <select id="lf-channel" name="channel" required aria-label="Preferred contact method">
+                <option value="" disabled selected>Preferred contact method</option>
+                <option value="Phone">Phone</option>
+                <option value="Email">Email</option>
+                <option value="Telegram">Telegram</option>
+                <option value="WhatsApp">WhatsApp</option>
+              </select>
+              <textarea id="lf-message" name="message" placeholder="What do you need automated? (optional)" rows="2"></textarea>
               <button type="submit" class="btn btn-ghost">Send my details</button>
+              <p class="lead-form-error" id="lf-error" role="alert" style="display: none;"></p>
             </form>
           </div>
         </div>
@@ -549,44 +558,136 @@ In the yard of the 21st century…
 
     <script src="app.js"></script>
     <script>
-      // Lead form — no backend required: builds a pre-filled email and hands it to the
-      // visitor's own mail client. Nothing is sent automatically; the visitor still hits
-      // "send" themselves, so the button copy never overpromises.
+      // Lead form — submits straight into a Supabase database (table: leads).
+      // The anon key below is meant to be public: Row Level Security on the table
+      // only allows INSERT for the anon role, so this key can never read, edit or
+      // delete existing rows — see the setup notes sent alongside this file.
       (function () {
         var form = document.getElementById('lead-form');
         if (!form) return;
+
+        // ====== Supabase project config — fill in once, after creating the project ======
+        // Project Settings → API → "Project URL" and "anon public" key.
+        var SUPABASE_URL = 'https://prcdjnbxbsppfwlmwkgz.supabase.co';
+        var SUPABASE_ANON_KEY = 'sb_publishable_bE_K9_zxRxlmyMKgofZ9Wg_fi7U1nWS';
+        // ===================================================================================
+
+        var errorEl = document.getElementById('lf-error');
+
+        // Capture UTM params (utm_source/utm_medium/utm_campaign/utm_content) as soon as the
+        // page loads, so we know which channel a lead came from even if they land here from a
+        // tagged Instagram/Telegram/YouTube/email link and only fill in the form later.
+        // First-touch value is kept in localStorage so it survives across visits on this device.
+        var utm = (function captureUtm() {
+          var params = new URLSearchParams(window.location.search);
+          var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+          var out = {};
+          var found = false;
+          keys.forEach(function (k) {
+            var v = params.get(k);
+            if (v) { out[k] = v; found = true; }
+          });
+          if (found) {
+            try { localStorage.setItem('taras_utm', JSON.stringify(out)); } catch (e) {}
+            return out;
+          }
+          try {
+            var stored = localStorage.getItem('taras_utm');
+            if (stored) return JSON.parse(stored);
+          } catch (e) {}
+          return {};
+        })();
+
+        function showError(message) {
+          if (!errorEl) return;
+          errorEl.textContent = message;
+          errorEl.style.display = 'block';
+        }
+        function clearError() {
+          if (!errorEl) return;
+          errorEl.style.display = 'none';
+          errorEl.textContent = '';
+        }
+
         form.addEventListener('submit', function (e) {
           e.preventDefault();
+          clearError();
+
           var name = document.getElementById('lf-name').value.trim();
           var contact = document.getElementById('lf-contact').value.trim();
-          var subject = encodeURIComponent('Invoice automation — setup call request');
-          var body = encodeURIComponent(
-            'Name: ' + name + '\nPhone/email: ' + contact + '\n\nPlease contact me about setting up invoice automation.'
-          );
-          window.location.href = 'mailto:book@taras-it.com?subject=' + subject + '&body=' + body;
-          // Send the visitor to the thank-you page too — mailto: opens the mail app
-          // without navigating the tab, so this still lands them on /thank-you.html.
-          // Anyone who reaches that page came from a submitted form, so it doubles
-          // as a simple lead counter.
-          window.setTimeout(function () {
-            window.location.href = 'thank-you.html';
-          }, 300);
+          var channel = document.getElementById('lf-channel').value;
+          var message = document.getElementById('lf-message').value.trim();
+
+          var submitBtn = form.querySelector('button[type="submit"]');
+          var originalLabel = submitBtn ? submitBtn.textContent : '';
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+          }
+
+          fetch(SUPABASE_URL + '/rest/v1/leads', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              apikey: SUPABASE_ANON_KEY,
+              Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
+              Prefer: 'return=minimal'
+            },
+            body: JSON.stringify({
+              name: name,
+              contact: contact,
+              channel: channel,
+              message: message || null,
+              utm_source: utm.utm_source || null,
+              utm_medium: utm.utm_medium || null,
+              utm_campaign: utm.utm_campaign || null,
+              page_url: window.location.href
+            })
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error('Request failed: ' + res.status);
+              // Anyone who reaches thank-you.html came from a successful submit, so it
+              // doubles as a simple lead counter.
+              window.location.href = 'thank-you.html';
+            })
+            .catch(function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalLabel;
+              }
+              showError("Couldn't send — please call +1 347-722-1230 or email book@taras-it.com directly.");
+            });
         });
       })();
     </script>
     <script>
-      // Cookie consent — analytics stays off until the visitor chooses "Accept".
-      // Hook point: when adding analytics later, only load/init it inside
-      // applyConsent() when value === 'accepted' (or listen for the
-      // 'cookieconsent' event on document and check e.detail.consent).
+      // Cookie consent — analytics (Google Analytics) stays off until the visitor
+      // chooses "Accept". loadGoogleAnalytics() is only ever called from
+      // applyConsent() when value === 'accepted'.
       (function () {
         var KEY = 'taras_cookie_consent';
+        var GA_ID = 'G-7XWMNS201S';
         var banner = document.getElementById('cookie-banner');
         var floatingCta = document.querySelector('.floating-cta');
         if (!banner) return;
 
+        function loadGoogleAnalytics() {
+          if (window.__gaLoaded) return;
+          window.__gaLoaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', GA_ID);
+        }
+
         function applyConsent(value) {
           window.tarasCookieConsent = value; // 'accepted' | 'necessary'
+          if (value === 'accepted') loadGoogleAnalytics();
           document.dispatchEvent(new CustomEvent('cookieconsent', { detail: { consent: value } }));
         }
 

@@ -81,8 +81,9 @@
             <div>
               <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">What we collect</h2>
               <p style="color: var(--color-text-muted);">
-                If you fill in the contact form on the homepage, we ask for your name and a phone number or
-                email address — that's it. There are no hidden fields and we don't ask for anything else.
+                If you fill in the contact form on the homepage, we ask for your name, a phone number or
+                email address, your preferred contact method, and — if you write one — a short message
+                about what you need. There are no hidden fields and we don't ask for anything else.
               </p>
               <p style="color: var(--color-text-muted); margin-top: var(--space-3);">
                 If you'd rather just call or email us directly using the links on the site, the only
@@ -93,29 +94,28 @@
             <div>
               <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">Why we collect it</h2>
               <p style="color: var(--color-text-muted);">
-                Only to get back to you. When you submit the form, your browser opens a pre-filled email
-                addressed to us — nothing is sent automatically, you still have to hit "send" yourself. We
-                use your name and contact details purely to reply about setting up automation for your
-                business.
+                Only to get back to you. Submitting the form sends your details straight to us so we can
+                reply and set up a call — nothing is used for anything beyond following up about
+                automation for your business.
               </p>
             </div>
 
             <div>
               <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">How the form actually works</h2>
               <p style="color: var(--color-text-muted);">
-                This site has no server or database behind the form. It simply builds an email in your own
-                mail app. That means we only ever see your name and contact details if you actually send
-                that email — at which point it lands in our inbox like any other email you'd send us
-                directly.
+                When you submit the form, your details are saved directly into a private database we use to
+                track requests — they are not posted anywhere public, and the database isn't browsable or
+                searchable by anyone outside our team. You can still reach us the old-fashioned way too, by
+                calling or emailing the addresses shown on the site — those never touch the database at all.
               </p>
             </div>
 
             <div>
               <h2 style="font-size: var(--text-xl); margin-bottom: var(--space-3);">How long we keep it</h2>
               <p style="color: var(--color-text-muted);">
-                Once your message reaches our inbox, we keep it for as long as we're in touch about your
-                project, and for a reasonable time after in case you get back in touch — generally no more
-                than a couple of years. After that, or sooner if you ask, we delete it.
+                We keep your request for as long as we're in touch about your project, and for a reasonable
+                time after in case you get back in touch — generally no more than a couple of years. After
+                that, or sooner if you ask, we delete it.
               </p>
             </div>
 
@@ -127,7 +127,8 @@
               </p>
               <ul class="fact-list" style="margin-top: var(--space-3);">
                 <li>→ Google Fonts loads the typefaces used on this page — Google may see the IP address making that request.</li>
-                <li>→ Our email provider delivers messages sent through the contact form, the same as any email.</li>
+                <li>→ Supabase hosts the database that stores form submissions on our behalf — it only stores the data, it doesn't use it for its own purposes.</li>
+                <li>→ Our email provider delivers messages you send us directly, the same as any email.</li>
                 <li>→ If we ever turn on visitor analytics, it will only run after you click "Accept" on the cookie banner — never before, and never for the "Only necessary" choice.</li>
               </ul>
             </div>
@@ -198,5 +199,25 @@
     </footer>
 
     <script src="app.js"></script>
+    <script>
+      // Google Analytics — only loads if the visitor already accepted cookies
+      // (choice made via the banner on the homepage). No banner lives on this
+      // page, so we just read the stored choice; nothing loads without it.
+      (function () {
+        var consent = null;
+        try { consent = localStorage.getItem('taras_cookie_consent'); } catch (e) {}
+        if (consent !== 'accepted') return;
+        var GA_ID = 'G-7XWMNS201S';
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      })();
+    </script>
   </body>
 </html>
